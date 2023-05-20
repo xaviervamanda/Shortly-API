@@ -1,7 +1,12 @@
 import { signUpDB } from "../repositories/users.repositories";
+import bcrypt from "bcrypt";
 
 export async function signUp (req, res){
-    await signUpDB(req.body);
+    const {name, email, password} = req.body;
+
+    const hash = bcrypt.hashSync(password, 10);
+    
+    await signUpDB({name, email, password: hash});
     return res.sendStatus(201);
 
 }
