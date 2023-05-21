@@ -6,7 +6,7 @@ export function shortenUrlDB (body, userId, shortUrl){
 }
 
 export function getUserShortenUrl(shortUrl){
-    return db.query(`SELECT id, "shortUrl" FROM urls WHERE "shortUrl" = $1`, [shortUrl]);
+    return db.query(`SELECT * FROM urls WHERE "shortUrl" = $1`, [shortUrl]);
 }
 export function getUrlByIdDB (id){
     return db.query(`SELECT * FROM urls WHERE id = $1`, [id]);

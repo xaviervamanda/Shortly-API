@@ -10,8 +10,6 @@ const usersRouter = Router();
 
 usersRouter.post("/signup", validateSchema(signUpSchema), createUserValidation, signUp);
 usersRouter.post("/signin", validateSchema(signInSchema), signIn);
-
-usersRouter.use(authValidation);
-usersRouter.get ("/users/me", getUserShortenUrls);
+usersRouter.get ("/users/me", authValidation, getUserShortenUrls);
 
 export default usersRouter;

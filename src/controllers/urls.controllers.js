@@ -7,14 +7,19 @@ export async function shortenUrl (req, res){
     try{
         await shortenUrlDB(req.body, userId, shortUrl);
         const urlInfo = await getUserShortenUrl(shortUrl);
-        return res.status(201).send(urlInfo.rows[0]);
+        const response = {
+            id: urlInfo.rows[0].id,
+            shortUrl: urlInfo.rows[0].shortUrl
+        }
+        return res.status(201).send(response);
     } catch (err) {
         return res.status(500).send(err.message);
     }
 }
 
-export async function getUrlById (req, res){
+export function getUrlById (req, res){
     const {urlInfos} = res.locals;
+
         const response = {
             id: urlInfos.rows[0].id,
             url: urlInfos.rows[0].url,
