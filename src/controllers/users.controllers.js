@@ -1,4 +1,4 @@
-import { checkUserByEmail, signUpDB } from "../repositories/users.repositories.js";
+import { checkUserByEmail, signInDB, signUpDB } from "../repositories/users.repositories.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -29,6 +29,8 @@ export async function signIn (req, res){
     const data = {email};
     const secretKey = process.env.JWT_SECRET;
     const token = jwt.sign(data, secretKey);
+
+    await signInDB(user.rows[0].id, token);
 
     return res.status(200).send({token});
 

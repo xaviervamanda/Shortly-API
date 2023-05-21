@@ -9,3 +9,6 @@ export function signUpDB (body){
     
 }
 
+export function signInDB (id, token){
+    return db.query(`INSERT INTO sessions ("userId", token) VALUES ($1, $2);`, [id, token]);
+}
