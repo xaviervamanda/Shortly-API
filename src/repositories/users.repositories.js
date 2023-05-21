@@ -8,3 +8,4 @@ export function signUpDB (body){
     return db.query("INSERT INTO users (name, email, password) VALUES ($1, $2, $3);", [name, email, password]);
     
 }
+
