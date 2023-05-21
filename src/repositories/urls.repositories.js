@@ -20,7 +20,10 @@ export function getUserShortenUrlsDB(userId){
     return db.query(`SELECT users.id, users.name,
     (SELECT SUM("visitCount") FROM urls WHERE "userId" = $1) AS visitCount, 
     (
-        SELECT JSON_AGG(JSON_BUILD_OBJECT('id', u.id, 'shortUrl', u."shortUrl", 'url', u.url, 'visitCount', u."visitCount"))
+        SELECT JSON_AGG
+        (
+            JSON_BUILD_OBJECT('id', u.id, 'shortUrl', u."shortUrl", 'url', u.url, 'visitCount', u."visitCount")
+        )
         FROM urls u
         WHERE u."userId" = $1
     ) AS "shortenedUrls"
@@ -30,5 +33,12 @@ export function getUserShortenUrlsDB(userId){
 }
 
 export function rankingUrlsByVisitsDB (){
-    
+    return db.query(`SELECT users.id, users.name,
+    COUNT(urls.id) AS linksCount,
+    SUM(urls."visitCount") AS visitCount
+    FROM users
+    LEFT JOIN urls ON users.id = urls."userId"
+    GROUP BY users.id, users.name
+    ORDER BY visitCount DESC;
+    `);
 }

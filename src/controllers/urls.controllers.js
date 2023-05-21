@@ -1,4 +1,4 @@
-import { deleteUrlDB, getUrlByIdDB, getUserShortenUrl, getUserShortenUrlsDB, shortenUrlDB } from "../repositories/urls.repositories.js";
+import { deleteUrlDB, getUrlByIdDB, getUserShortenUrl, getUserShortenUrlsDB, rankingUrlsByVisitsDB, shortenUrlDB } from "../repositories/urls.repositories.js";
 import { nanoid } from "nanoid";
 
 export async function shortenUrl (req, res){
@@ -55,5 +55,6 @@ export async function getUserShortenUrls (req, res){
 }
 
 export async function rankingUrlsByVisits (req, res){
-
+    const ranking = await rankingUrlsByVisitsDB();
+    return res.status(200).send(ranking.rows);
 }
