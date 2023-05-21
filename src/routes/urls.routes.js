@@ -2,7 +2,7 @@ import { Router } from "express";
 import { urlSchema } from "../schemas/urls.schemas.js";
 import { validateSchema } from "../middlewares/validationSchema.js";
 import { authValidation } from "../middlewares/authValidation.middleware.js";
-import { deleteUrl, getUrlById, shortenUrl } from "../controllers/urls.controllers.js";
+import { deleteUrl, getUrlById, getUserShortenUrls, shortenUrl } from "../controllers/urls.controllers.js";
 
 
 const urlsRouter = Router();
@@ -15,7 +15,7 @@ urlsRouter.use(authValidation);
 
 urlsRouter.post ("/urls/shorten", validateSchema(urlSchema), shortenUrl);
 urlsRouter.delete ("/urls/:id", deleteUrl);
-// urlsRouter.get ("/users/me", getUserShortenUrls);
+urlsRouter.get ("/users/me", getUserShortenUrls);
 
 
 export default urlsRouter;

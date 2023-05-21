@@ -1,4 +1,4 @@
-import { deleteUrlDB, getUrlByIdDB, getUserShortenUrls, shortenUrlDB } from "../repositories/urls.repositories.js";
+import { deleteUrlDB, getUrlByIdDB, getUserShortenUrl, getUserShortenUrlsDB, shortenUrlDB } from "../repositories/urls.repositories.js";
 import { nanoid } from "nanoid";
 
 export async function shortenUrl (req, res){
@@ -6,7 +6,7 @@ export async function shortenUrl (req, res){
     const shortUrl = nanoid(8);
     try{
         await shortenUrlDB(req.body, userId, shortUrl);
-        const urlInfo = await getUserShortenUrls(shortUrl);
+        const urlInfo = await getUserShortenUrl(shortUrl);
         return res.status(201).send(urlInfo.rows[0]);
     } catch (err) {
         return res.status(500).send(err.message);
@@ -41,4 +41,10 @@ export async function deleteUrl (req, res){
     } catch (err) {
         return res.status(500).send(err.message);
     }
+}
+
+export async function getUserShortenUrls (req, res){
+    const {userId} = res.locals;
+    const urls = await getUserShortenUrlsDB(userId);
+    return res.status(200).send(urls.rows[0]);
 }
