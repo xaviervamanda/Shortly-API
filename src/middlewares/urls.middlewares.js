@@ -1,4 +1,4 @@
-import { getUrlByIdDB, getUserShortenUrl } from "../repositories/urls.repositories";
+import { getUrlByIdDB, getUserShortenUrl } from "../repositories/urls.repositories.js";
 
 export async function checkExistingUrlById (req, res, next){
     const {id} = req.params;
