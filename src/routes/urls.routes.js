@@ -2,8 +2,8 @@ import { Router } from "express";
 import { urlSchema } from "../schemas/urls.schemas.js";
 import { validateSchema } from "../middlewares/validationSchema.js";
 import { authValidation } from "../middlewares/authValidation.middleware.js";
-import { shortenUrl } from "../controllers/urls.controllers.js";
-import { getUrlById } from "../repositories/urls.repositories.js";
+import { getUrlById, shortenUrl } from "../controllers/urls.controllers.js";
+
 
 const urlsRouter = Router();
 
