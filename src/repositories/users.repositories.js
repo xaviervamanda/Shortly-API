@@ -12,3 +12,7 @@ export function signUpDB (body){
 export function signInDB (id, token){
     return db.query(`INSERT INTO sessions ("userId", token) VALUES ($1, $2);`, [id, token]);
 }
+
+export function checkUserSession (token){
+    return db.query("SELECT * FROM sessions WHERE token = $1;", [token]);
+}
