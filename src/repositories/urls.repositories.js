@@ -42,3 +42,7 @@ export function rankingUrlsByVisitsDB (){
     ORDER BY visitCount DESC;
     `);
 }
+
+export function updateUrlVisitCount (shortUrl){
+    return db.query(`UPDATE urls SET "visitCount" = "visitCount" + 1 WHERE "shortUrl" = $1`, [shortUrl]);
+}

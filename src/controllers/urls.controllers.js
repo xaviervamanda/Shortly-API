@@ -1,4 +1,4 @@
-import { deleteUrlDB, getUrlByIdDB, getUserShortenUrl, getUserShortenUrlsDB, rankingUrlsByVisitsDB, shortenUrlDB } from "../repositories/urls.repositories.js";
+import { deleteUrlDB, getUserShortenUrl, getUserShortenUrlsDB, rankingUrlsByVisitsDB, shortenUrlDB, updateUrlVisitCount } from "../repositories/urls.repositories.js";
 import { nanoid } from "nanoid";
 
 export async function shortenUrl (req, res){
@@ -48,4 +48,14 @@ export async function getUserShortenUrls (req, res){
 export async function rankingUrlsByVisits (req, res){
     const ranking = await rankingUrlsByVisitsDB();
     return res.status(200).send(ranking.rows);
+}
+
+export async function openShortenUrl (req, res){
+    const {shortUrlInfos} = res.locals;
+    try{
+        await updateUrlVisitCount(shortUrlInfos.rows[0].shortUrl);
+        return res.redirect(shortUrlInfos.rows[0].url);
+    } catch (err){
+        return res.status(500).send(err.message);
+    }
 }

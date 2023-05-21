@@ -2,14 +2,14 @@ import { Router } from "express";
 import { urlSchema } from "../schemas/urls.schemas.js";
 import { validateSchema } from "../middlewares/validationSchema.js";
 import { authValidation } from "../middlewares/authValidation.middleware.js";
-import { deleteUrl, getUrlById, getUserShortenUrls, rankingUrlsByVisits, shortenUrl } from "../controllers/urls.controllers.js";
-import { checkExistingUrl, checkUrlOwner } from "../middlewares/urls.middlewares.js";
+import { deleteUrl, getUrlById, getUserShortenUrls, openShortenUrl, rankingUrlsByVisits, shortenUrl } from "../controllers/urls.controllers.js";
+import { checkExistingUrl, checkExistingUrlById, checkUrlOwner } from "../middlewares/urls.middlewares.js";
 
 
 const urlsRouter = Router();
 
-urlsRouter.get ("/urls/:id", checkExistingUrl, getUrlById);
-// urlsRouter.get ("/urls/open/:shortUrl", openShortenUrl);
+urlsRouter.get ("/urls/:id", checkExistingUrlById, getUrlById);
+urlsRouter.get ("/urls/open/:shortUrl", checkExistingUrl, openShortenUrl);
 urlsRouter.get ("/ranking", rankingUrlsByVisits);
 
 urlsRouter.use(authValidation);
