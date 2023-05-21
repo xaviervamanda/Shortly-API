@@ -45,6 +45,15 @@ export async function deleteUrl (req, res){
 
 export async function getUserShortenUrls (req, res){
     const {userId} = res.locals;
-    const urls = await getUserShortenUrlsDB(userId);
-    return res.status(200).send(urls.rows[0]);
+    try{
+        const urls = await getUserShortenUrlsDB(userId);
+        return res.status(200).send(urls.rows[0]);
+    }catch (err) {
+        return res.status(500).send(err.message);
+    }
+    
+}
+
+export async function rankingUrlsByVisits (req, res){
+
 }

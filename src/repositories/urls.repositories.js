@@ -28,3 +28,7 @@ export function getUserShortenUrlsDB(userId){
     JOIN users ON users.id = urls."userId"
     WHERE "userId" = $1;`, [userId]);
 }
+
+export function rankingUrlsByVisitsDB (){
+    
+}
