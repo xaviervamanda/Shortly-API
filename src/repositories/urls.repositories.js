@@ -9,5 +9,9 @@ export function getUserShortenUrls(shortUrl){
     return db.query(`SELECT id, "shortUrl" FROM urls WHERE "shortUrl" = $1`, [shortUrl]);
 }
 export function getUrlByIdDB (id){
-    return db.query(`SELECT id, url, "shortUrl" FROM urls WHERE id = $1`, [id]);
+    return db.query(`SELECT * FROM urls WHERE id = $1`, [id]);
+}
+
+export function deleteUrlDB (id){
+    return db.query(`DELETE FROM urls WHERE id = $1`, [id]);
 }
