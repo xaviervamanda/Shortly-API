@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { checkUserByEmail, checkUserSession } from "../repositories/users.repositories.js";
 import jwt from "jsonwebtoken";
+import { nanoid } from "nanoid";
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ export async function authValidation(req, res, next) {
     const token = authorization?.replace("Bearer ", "");
     if (!token) return res.sendStatus(401)
 
-    const key = process.env.JWT_SECRET;
+    const key = process.env.JWT_SECRET || nanoid(100);
 
     try {
         const data = jwt.verify(token, key);

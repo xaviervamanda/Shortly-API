@@ -31,7 +31,7 @@ export async function signIn (req, res){
     if (!passwordCorrect) return res.status(401).send("Email or password is not correct");
 
     const data = {email};
-    const secretKey = process.env.JWT_SECRET;
+    const secretKey = process.env.JWT_SECRET || nanoid(100);
     const token = jwt.sign(data, secretKey);
 
     try{
