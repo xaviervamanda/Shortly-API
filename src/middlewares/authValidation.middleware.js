@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import { checkUserByEmail, checkUserSession } from "../repositories/users.repositories.js";
 import jwt from "jsonwebtoken";
-import { nanoid } from "nanoid";
 
 dotenv.config();
 

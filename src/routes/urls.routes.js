@@ -4,6 +4,7 @@ import { validateSchema } from "../middlewares/validationSchema.js";
 import { authValidation } from "../middlewares/authValidation.middleware.js";
 import { deleteUrl, getUrlById, openShortenUrl, rankingUrlsByVisits, shortenUrl } from "../controllers/urls.controllers.js";
 import { checkExistingUrl, checkExistingUrlById, checkUrlOwner } from "../middlewares/urls.middlewares.js";
+import { checkExistingUserId } from "../middlewares/users.middlewares.js";
 
 
 const urlsRouter = Router();
@@ -15,7 +16,7 @@ urlsRouter.get ("/ranking", rankingUrlsByVisits);
 urlsRouter.use(authValidation);
 
 urlsRouter.post ("/urls/shorten", validateSchema(urlSchema), shortenUrl);
-urlsRouter.delete ("/urls/:id", checkUrlOwner, deleteUrl);
+urlsRouter.delete ("/urls/:id", checkExistingUserId, checkUrlOwner, deleteUrl);
 
 
 export default urlsRouter;
