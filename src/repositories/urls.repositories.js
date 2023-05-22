@@ -18,7 +18,7 @@ export function deleteUrlDB (id){
 
 export function getUserShortenUrlsDB(userId){
     return db.query(`SELECT users.id, users.name,
-    (SELECT SUM("visitCount") FROM urls WHERE "userId" = $1) AS visitCount, 
+    (SELECT SUM("visitCount") FROM urls WHERE "userId" = $1) AS "visitCount", 
     (
         SELECT JSON_AGG
         (
