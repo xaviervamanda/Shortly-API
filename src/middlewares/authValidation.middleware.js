@@ -10,7 +10,7 @@ export async function authValidation(req, res, next) {
     const token = authorization?.replace("Bearer ", "");
     if (!token) return res.sendStatus(401)
 
-    const key = process.env.JWT_SECRET || nanoid(100);
+    const key = process.env.JWT_SECRET || "my_secret_key";
 
     try {
         const data = jwt.verify(token, key);
