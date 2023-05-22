@@ -39,7 +39,8 @@ export function rankingUrlsByVisitsDB (){
     FROM users
     LEFT JOIN urls ON users.id = urls."userId"
     GROUP BY users.id, users.name
-    ORDER BY "visitCount" DESC;
+    ORDER BY "visitCount" DESC
+    LIMIT 10;
     `);
 }
 
