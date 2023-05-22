@@ -2,10 +2,6 @@ import {db} from "../database/database.connection.js";
 export function checkUserByEmail(email){
     return db.query("SELECT * FROM users WHERE email = $1;", [email]);
 }
-
-export function checkUserById(id){
-    return db.query("SELECT * FROM users WHERE id = $1;", [id]);
-}
 export function signUpDB (body){
     const {name, email, password} = body;
 
