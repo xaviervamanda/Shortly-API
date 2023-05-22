@@ -34,12 +34,12 @@ export function getUserShortenUrlsDB(userId){
 
 export function rankingUrlsByVisitsDB (){
     return db.query(`SELECT users.id, users.name,
-    COUNT(urls.id) AS linksCount,
-    SUM(urls."visitCount") AS visitCount
+    COUNT(urls.id) AS "linksCount",
+    SUM(urls."visitCount") AS "visitCount"
     FROM users
     LEFT JOIN urls ON users.id = urls."userId"
     GROUP BY users.id, users.name
-    ORDER BY visitCount DESC;
+    ORDER BY "visitCount" DESC;
     `);
 }
 
